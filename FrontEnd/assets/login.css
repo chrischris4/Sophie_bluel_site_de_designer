@@ -1,0 +1,99 @@
+body{
+max-width: 1140px;
+margin:auto;
+font-size: 14px;
+}
+
+a {
+
+    text-decoration: none;
+    color: #3D3D3D
+    ;
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	margin: 50px 0
+}
+
+h1
+{
+    font-family: 'Syne';
+    color: #B1663C;
+}
+
+h1 > span {
+    color: #B1663C;
+	font-family: 'Syne';
+	font-size:10px;
+	letter-spacing: 0.1em;
+;
+}
+
+nav ul {
+    font-family: 'Work Sans';
+	display: flex;
+	align-items: center;
+	list-style-type: none;
+
+}
+nav li {
+	padding: 0 10px;
+	font-size: 1.2em;
+}
+
+li:hover {
+	color: #B1663C;
+}
+
+#container{
+    font-family: 'Syne';
+    width:400px;
+    margin:0 auto;
+    margin-top:10%;
+}
+form {
+    width:100%;
+    padding: 30px;
+}
+#container h2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+
+label{
+    color: #3D3D3D;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    border: none;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+
+    text-align: center;
+    border-radius: 20px;
+    font-family: 'Work Sans';
+    background-color: #1D6154;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: #1D6154;
+    cursor: pointer;
+    width: 30%;
+}
+input[type=submit]:hover {
+    font-family: 'Work Sans';
+    background-color: white;
+    color: #1D6154;
+    border: 1px solid #1D6154;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Sophie Bluel - Architecte d'intérieur</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<meta name="description" content="">
+	<link rel="stylesheet" href="style.css">
+	<script src="login.js"></script>
+</head>
+<body>
+<header>
+	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+	<nav>
+		<ul>
+			<li>projets</li>
+			<li>contact</li>
+			<li><a id="nav-logout" class="only-admin">logout</a></li>
+			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+		</ul>
+	</nav>
+</header>
+
+
+<div id="container"> 
+<form action="verification.php" method="POST">
+<h2>Log in</h2>
+
+<label><b>Email</b></label>
+<input type="text"  name="email" required>
+
+<label><b>Mot de passe</b></label>
+<input type="password"  name="password" required>
+
+<input type="submit" id='submit' value='Se Connecter' >
+    <p>
+        <a href="#"> Mot de passe oublié ?</a>
+    </p>
+
+
+</form>
+</div>
+</body>
