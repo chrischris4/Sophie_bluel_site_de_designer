@@ -1,3 +1,5 @@
+
+
 body{
 max-width: 1140px;
 margin:auto;
@@ -6,10 +8,14 @@ font-size: 14px;
 
 a {
 
+    margin: auto;
     text-decoration: none;
-    color: #3D3D3D
+    color: #3D3D3D;
+    font-family: 'work sans';
+    
     ;
 }
+
 
 header {
 	display: flex;
@@ -19,6 +25,8 @@ header {
 
 h1
 {
+    display: flex;
+    flex-direction: column;
     font-family: 'Syne';
     color: #B1663C;
 }
@@ -29,6 +37,11 @@ h1 > span {
 	font-size:10px;
 	letter-spacing: 0.1em;
 ;
+}
+
+h2{
+    font-family: 'Syne';
+    color: #1D6154;
 }
 
 nav ul {
@@ -47,29 +60,44 @@ li:hover {
 	color: #B1663C;
 }
 
-#container{
-    font-family: 'Syne';
-    width:400px;
-    margin:0 auto;
-    margin-top:10%;
+
+#login {
+	width: 30%;
+    margin: auto;
 }
-form {
-    width:100%;
-    padding: 30px;
+#login > * {
+	text-align: center;
+
 }
-#container h2{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-bottom: 10px;
+#login h2{
+	margin-bottom: 20px;
+}
+#login form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#login input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+
+#login label {
+	margin: 2em 0 1em 0;
 }
 
 
 label{
+    font-family: 'work sans';
     color: #3D3D3D;
 }
 
-input[type=text], input[type=password] {
+input[type=email], input[type=password] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -79,8 +107,7 @@ input[type=text], input[type=password] {
 }
 
 input[type=submit] {
-
-    text-align: center;
+    align-self: center;
     border-radius: 20px;
     font-family: 'Work Sans';
     background-color: #1D6154;
@@ -89,7 +116,7 @@ input[type=submit] {
     margin: 8px 0;
     border: #1D6154;
     cursor: pointer;
-    width: 30%;
+    width: 50%;
 }
 input[type=submit]:hover {
     font-family: 'Work Sans';
@@ -97,3 +124,14 @@ input[type=submit]:hover {
     color: #1D6154;
     border: 1px solid #1D6154;
 }
+
+footer nav ul {
+	display: flex;
+	justify-content: flex-end;
+	margin: 2em;
+}
+
+.only-guest{display:block;}
+.only-admin{display:none;}
+body.connected .only-guest{display:none;}
+body.connected .only-admin{display:block;}
