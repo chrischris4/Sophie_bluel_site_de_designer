@@ -38,8 +38,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     	this.parentNode.remove();
 
   		};
-//   		childElements[i].appendChild(deleteButton);
-// 		}
 			});
 	})
 	})
@@ -60,13 +58,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
 		// change modal with "ajouter une photo"
-	// document.querySelector('.modal-photo-btn').addEventListener('click', function(event) {
-	// 	document.querySelector('.modal').setAttribute('aria-hidden', 'true')
-	// 	document.querySelector('.modal').classList.remove('open')
-	// 	document.querySelector('.modal-form').removeAttribute('aria-hidden')
-	// 	document.querySelector('.modal-form').classList.add('open')
-	// 	document.querySelector('.modal-form').style.display = "block"
-	// })
+	document.querySelector('.modal-photo-btn').addEventListener('click', function(event) {
+		console.log('yoooo')
+		document.querySelector('#modal-gallery').style.display = "none"
+		document.querySelector('#modal-form').style.display = "block"
+	})
 
 	// Closing modal when clicking on X
 	document.querySelector('.modal-close').addEventListener('click', function(event) {

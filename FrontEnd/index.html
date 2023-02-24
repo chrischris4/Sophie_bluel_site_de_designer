@@ -37,7 +37,7 @@
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
 		<a href="#modal-works">
-			<div class="modifier only-admin">
+			<div class="modifier1 only-admin">
 				<i class="fa-regular fa-pen-to-square"></i><input id="update-image.udpate-btn" type="submit" value="modifier">
 			</div>
 		</a>
@@ -57,7 +57,7 @@
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
 		<a href="#modal-works" class="modal-open">
-			<div class="modifier only-admin">
+			<div class="modifier2 only-admin">
 				<i class="fa-regular fa-pen-to-square"></i><input id="update-works.udpate-btn" type="submit" value="modifier">
 			</div>
 		</a>
@@ -95,21 +95,20 @@
 </footer>
 
 
-<div id="modal-works" class="modal" aria-modal="true"  aria-hidden="true" role="modal" aria-labelledby="modal-title">
+<div id="modal-works" class="modal" aria-modal="true" role="modal" aria-labelledby="modal-title">
 
-	<div id="modal-gallery" class="modal-content" >
+	<div id="modal-gallery" class="modal-content">
 		<a href="#" class="modal-close">X</a>
 		<h2 class="modal-title">Galerie photo</h2>
-		<div id="modal-photo">
-
-		</div>
+		<div id="modal-photo"></div>
 		<div id="bordure"></div>
-		<button class="modal-photo-btn" value="Ajouter une photo">Ajouter une photo</button>
+		<a href="#modal-form" class="modal-photo-btn" value="Ajouter une photo">Ajouter une photo</a>
 		<div id="modal-delete">
 			<p>Supprimer la galerie</p>
 		</div>
 	</div>
-	<div class="modal-form" class="modal-content" aria-hidden="true">
+
+	<div id="modal-form" class="modal-content">
 		<a href="#" class="modal-close">X</a>
 		<h2 class="modal-title">Ajout photo</h2>
 		<div id="addPic">

@@ -23,6 +23,10 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
+.fa-pen-to-square{
+	color: #000;
+}
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -56,6 +60,7 @@ body {
 }
 
 input[type=submit] {
+	font-family: 'Work Sans';
 	appearance: inherit;
 	border: none;
 	background-color: white;
@@ -251,6 +256,7 @@ a {
 
 /* modal */
 
+
 .modifier{
 	color: black;
 	font-family: 'Work sans';
@@ -277,8 +283,8 @@ a {
 	align-items: center;
 	background: #fff;
 	padding: 20px;
-	position: relative;
-	margin: 10% auto;
+	margin: 5% auto;
+	justify-content: center;
 	width: 40%;
 	box-shadow: 0px 0px 20px #000;
 	border-radius: 10px;
@@ -297,6 +303,8 @@ a {
 }
 
 #bordure {
+	width: 60%;
+	margin-top: 50px;
 	border-bottom:1px solid gray;
 }
 
@@ -337,8 +345,10 @@ a {
 
 }
 
-.modal-form{
+#modal-form{
 	display: none;
+	align-items: center;
+	height: fit-content;
 }
 
 
