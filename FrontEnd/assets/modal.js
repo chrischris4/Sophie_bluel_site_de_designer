@@ -3,7 +3,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	// Opening modal
 	document.querySelector('.modal-open').addEventListener('click', function(event) {
-		document.querySelector('.modal').removeAttribute('aria-hidden')
+		document.querySelector('#modal-form').style.display = "none"
+		document.querySelector('#modal-gallery').style.display = "flex"
+		// document.querySelector('.modal').removeAttribute('aria-hidden')
 		document.querySelector('.modal').classList.add('open')
 
 		// add works to modal
@@ -59,25 +61,38 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 		// change modal with "ajouter une photo"
 	document.querySelector('.modal-photo-btn').addEventListener('click', function(event) {
-		console.log('yoooo')
 		document.querySelector('#modal-gallery').style.display = "none"
-		document.querySelector('#modal-form').style.display = "block"
+		document.querySelector('#modal-form').style.display = "flex"
+	})
+
+
+		// go back to first modal with arrow
+	document.querySelector('.modal-back').addEventListener('click', function(event) {
+		document.querySelector('#modal-form').style.display = "none"
+		document.querySelector('#modal-gallery').style.display = "flex"
 	})
 
 	// Closing modal when clicking on X
 	document.querySelector('.modal-close').addEventListener('click', function(event) {
-		document.querySelector('.modal').setAttribute('aria-hidden', 'true')
+		// document.querySelector('.modal').setAttribute('aria-hidden', 'true')
+		document.querySelector('#modal-form').style.display = "none"
 		document.querySelector('.modal').classList.remove('open')
 	})
 
 	// Closing modal when clicking on overlay
 	document.querySelector('.modal').addEventListener('click', function(event) {
-		document.querySelector('.modal').setAttribute('aria-hidden', 'true')
+		// document.querySelector('.modal').setAttribute('aria-hidden', 'true')
+		document.querySelector('#modal-form').style.display = "none"
+		document.querySelector('#modal-gallery').style.display = "none"
 		document.querySelector('.modal').classList.remove('open')
 	})
 
 	// Avoiding modal to close when clicking on modal content
 	document.querySelector('.modal-content').addEventListener('click', function(event) {
+		event.stopPropagation()
+	})
+
+	document.querySelector('#modal-form').addEventListener('click', function(event) {
 		event.stopPropagation()
 	})
 })

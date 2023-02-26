@@ -294,7 +294,15 @@ a {
 	align-self: flex-end;
 	text-decoration: none;
 	color: #000;
+} 
+
+.modal-back-close{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	text-align: center;
 }
+
 
 .modal-title {
 	font-family: 'Work sans';
