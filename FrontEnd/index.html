@@ -110,17 +110,28 @@
 
 	<div id="modal-form" class="modal-content">
 		<div class="modal-back-close">
-		<a href="#" class="modal-back">arrow</a>  <a href="#" class="modal-close">X</a>
+		<a href="#" class="modal-back"><i class="fa-regular fa-arrow-left"></i></a>  <a href="#" class="modal-close2">X</a>
 		</div>
 		<h2 class="modal-title">Ajout photo</h2>
 		<div id="addPic">
-			<button class="addPicBtn" value="Ajouter photo"></button>
+			<button class="addPicBtn" value="Ajouter photo">+ Ajouter photo</button>
 			<p>jpg, pnj : 4mo max</p>
 		</div>
+		<div class="modal-form-input">
 		<label for="titre">Titre</label>
 		<input type="text" id="titre">
 		<label for="categorie">Categorie</label>
-		<input type="text" id="categorie">
+		<select name="categorie" id="select-categorie">
+			<option value=""></option>
+			<option value="object">Object</option>
+			<option value="appartement">Appartement</option>
+			<option value="hoteletrestaurant">Hôtel et restaurant</option>
+		</select>
+				</div>
+		<div id="bordure"></div>
+		<button class="valider-btn" value="valider">Valider</button>
+
+		
 	</div>
 </div>
 

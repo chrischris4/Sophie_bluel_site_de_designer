@@ -33,30 +33,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				let dltElem = document.createElement('button');
 				figureElem.appendChild(dltElem);
 				dltElem.classList.add('dlt-element-btn');
+				
 
 
-  		dltElem.onclick = function() {
-// Supprimer l'élément parent du bouton (c'est-à-dire l'élément que l'utilisateur veut supprimer)
-    	this.parentNode.remove();
 
-  		};
-			});
+
+//   		dltElem.onclick = function() {
+// // Supprimer l'élément parent du bouton (c'est-à-dire l'élément que l'utilisateur veut supprimer)
+//     	this.parentNode.remove();
+
+//   		};
+		});
 	})
 	})
-
-	// fetch('http://localhost:5678/api-docs/#/default/delete_works__id_, {
-	// 	method: 'DELETE'
-	//   })
-	//   .then(response => {
-	// 	if (!response.ok) {
-	// 	  throw new Error('Erreur lors de la suppression du travail');
-	// 	}
-	// 	console.log('Le travail a été supprimé avec succès');
-	//   })
-	//   .catch(error => {
-	// 	console.error('Une erreur est survenue:', error);
-	//   });
-
 
 
 		// change modal with "ajouter une photo"
@@ -74,16 +63,27 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	// Closing modal when clicking on X
 	document.querySelector('.modal-close').addEventListener('click', function(event) {
-		// document.querySelector('.modal').setAttribute('aria-hidden', 'true')
+		console.log("yooo")
 		document.querySelector('#modal-form').style.display = "none"
+		document.querySelector('#modal-gallery').style.display = "none"
+		document.getElementById('modal-photo').innerHTML = "";
+		document.querySelector('.modal').classList.remove('open')
+	})
+
+
+	document.querySelector('.modal-close2').addEventListener('click', function(event) {
+		console.log("yooo")
+		document.querySelector('#modal-form').style.display = "none"
+		document.querySelector('#modal-gallery').style.display = "none"
+		document.getElementById('modal-photo').innerHTML = "";
 		document.querySelector('.modal').classList.remove('open')
 	})
 
 	// Closing modal when clicking on overlay
 	document.querySelector('.modal').addEventListener('click', function(event) {
-		// document.querySelector('.modal').setAttribute('aria-hidden', 'true')
 		document.querySelector('#modal-form').style.display = "none"
 		document.querySelector('#modal-gallery').style.display = "none"
+		document.getElementById('modal-photo').innerHTML = "";
 		document.querySelector('.modal').classList.remove('open')
 	})
 
@@ -95,4 +95,25 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	document.querySelector('#modal-form').addEventListener('click', function(event) {
 		event.stopPropagation()
 	})
+
+
+	const dltElem = document.querySelectorAll('.dlt-element-btn');
+dltElem.forEach(button => {
+	button.addEventListener('click', () => {
+		const elementId = button.parentElement.id;
+		fetch(`http://localhost:5678/api-docs/#/default/delete_works__id_/${elementId}`, {
+		method: 'DELETE',
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      console.log(`Element ${elementId} deleted successfully`);
+      button.parentElement.remove();
+    })
+    .catch(error => {
+      console.error(`There was a problem deleting element ${elementId}:`, error);
+    });
+  });
+});
 })
