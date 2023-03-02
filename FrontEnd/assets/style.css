@@ -24,6 +24,10 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
+.fa-arrow-left{
+	color: #000;
+}
+
 .fa-pen-to-square{
 	color: #000;
 }
@@ -296,10 +300,6 @@ a {
 	color: #000;
 } 
 
-.modal-close2 {
-	text-decoration: none;
-	color: #000;
-}
 
 
 .modal-back-close{
@@ -346,11 +346,53 @@ a {
 }
 
 .dlt-element-btn{
-	width: 5px;
+	width: 17px;
+	height: 17px;
+	background-color: #000;
+	border-radius: 5px;
 	border: solid 1px black;
 	position: absolute;
 	margin-left: -20px;
 	margin-top: 5px;
+}
+
+.move-element-btn{
+	/* display: none; */
+	width: 17px;
+	height: 17px;
+	background-color: #000;
+	border-radius: 5px;
+	border: solid 1px black;
+	position: absolute;
+	margin-left: -40px;
+	margin-top: 5px;
+}
+
+.move-element-btn:hover{
+	background-color: #000;
+}
+
+
+.dlt-element-btn:hover{
+	background-color: #000;
+}
+
+
+.fa-trash-can{
+    position: absolute;
+    top: 3.5px;
+    left: 2.9px;
+	font-size: 10px;
+	color: white;
+}
+
+.fa-arrows-up-down-left-right{
+	/* display: none; */
+    position: absolute;
+    top: 3.5px;
+    left: 2.2px;
+	font-size: 10px;
+	color: white;
 }
 
 #modal-photo
@@ -369,12 +411,22 @@ a {
 }
 
 
-
+#preview{
+	display: none;
+	margin-top: 5px;
+	width: 129px;
+	height: 169px;
+	align-items: center;
+	justify-content: center;
+}
 
 #addPic{
+	align-items: center;
 	display: flex;
+	position: relative;
+	overflow: hidden;
 	flex-direction: column;
-	height: 200px;
+	height: 169px;
 	width: 420px;
 	background-color: #E8F1F6
 	;
@@ -382,12 +434,33 @@ a {
 
 
 #addPic p{
+	top:139px;
+    left: 161px;
 	font-size: 10px;
+    position: absolute;
 	display: flex;
 	justify-content: center;
 }
 
+
+#addPic input[type=file] {
+	top: 90px;
+    left: 120px;
+    position: absolute;
+	height: 40px;
+	justify-content: center;
+	width: 180px;
+	font-style: inherit;
+	opacity: 0;
+	font-size: 90px;
+	z-index: 2;
+}
+
 .addPicBtn{
+	top: 80px;
+	left: 120px;
+	position: absolute;
+	font-style: inherit;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -397,15 +470,15 @@ a {
 	color: #306685;
 	border: 1px solid #CBD6DC;
 	background-color: #CBD6DC;
-	margin : 2em auto ;
+	margin : 10px auto ;
 	width: 180px;
 	border-radius: 60px ;
 }
 
 .addPicBtn:hover{
-	color: #CBD6DC;
-	border: 1px solid #306685;
-	background-color: #306685;
+	color: #306685;
+	border: 1px solid #CBD6DC;
+	background-color: #CBD6DC;
 }
 
 #modal-form input{

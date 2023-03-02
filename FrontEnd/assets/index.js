@@ -26,8 +26,9 @@ fetch('http://localhost:5678/api/works')
 		// Collecting categories
 		categories.push(element.category);
 
-    		// Creating <figure>
+		// Creating <figure>
 		let figureElem = document.createElement('figure');
+		figureElem.setAttribute('id', `work-item-${element.id}`);
 		figureElem.classList.add(`work-item`);
 		figureElem.classList.add(`category-id-0`);
 		figureElem.classList.add(`category-id-${element.categoryId}`);
