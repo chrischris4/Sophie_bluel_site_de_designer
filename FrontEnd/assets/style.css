@@ -53,6 +53,28 @@ body {
 	top: 0; left: 0;
 }
 
+.fa-image{
+	position: absolute;
+	top: 0px;
+	margin-top: 5px;
+	font-size: 80px;
+	color: #306685;
+}
+
+.modifier {
+	margin-bottom: 5px;
+}
+
+.modifier1 {
+	margin: 5px 0 0 57px;
+}
+
+.modifier2 {
+	position: absolute;
+	right: 550px;
+	top: 665px;
+}
+
 
 #editBtn {
 	border-radius: 20px;

@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	})
 
 	// afficher cross au survol ////////////////////////////////////
-	// document.querySelectorAll('.work-item-thumbnail').addEventListener('mouseover', function(event) {
+	// document.querySelector('.work-item-thumbnail').addEventListener('mouseover', function(event) {
 	// 	document.querySelectorAll('.fa-arrows-up-down-left-right').style.display = "flex"
 	// 	document.querySelectorAll('.move-element-btn').style.display = "flex"
 	// })
@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			image.style.width = "129px"
 			image.style.height = "200px"
 			image.style.objectFit = "cover"
+			document.querySelector('.fa-image').style.display = "none"
 			document.getElementById('preview').style.display = "flex"
 			document.querySelector('.pAddPic').style.display = "none"
 			document.querySelector('#imageValue').style.display = "none"
@@ -109,28 +110,44 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
 	// ajouter un work
-	let imageNewWork = document.getElementById("imageValue").value;
+
+	let imageNewWork = document.createElement('img');
+	imageNewWork.setAttribute("crossorigin", "anonymous");
+	imageNewWork = document.getElementById("imageValue").value;
+
 	let titleNewWork = document.getElementById("titleValue").value;
 	let categoryNewWork = document.getElementById("categoryValue").value;
+
+	const formData = new FormData();
+
+	formData.append('image', imageNewWork);
+	formData.append('title', titleNewWork);
+	formData.append('category', categoryNewWork);
 
 	let addElem = document.querySelector(".valider-btn");
 
 	addElem.addEventListener('click', function(event) {
-		const newWork = { image: imageNewWork, title: titleNewWork, category:categoryNewWork };
+		// const newWork = { 'image': imageNewWork, 'title': titleNewWork, 'category':categoryNewWork };
 		fetch(`http://localhost:5678/api/works`, {
 			method: 'POST',
 			headers: {
 				Authorization: `Basic ${localStorage.getItem('token')}`,
-				'Content-Type': 'application/json'
+				'Content-Type': 'multipart/form-data',
+				body: 'multipart/form-data',
+				body: JSON.stringify(formData)
+
 			},
-			body: JSON.stringify(newWork)
+			// body: formData
 		})
 		.then(response => {
-			console.log(response);
-			if(!response.ok) {
-				throw new Error('Network response was not ok');
-			}
-			console.log(`Element added successfully`);
+			console.log(response.bodyUsed);
+			const res = response.blob();
+			console.log(response.bodyUsed);
+			return res;
+		})
+		.then((response) => {
+			const objectURL = URL.createObjectURL(response);
+			imageNewWork.src = objectURL;
 		})
 		.catch(error => {
 			console.error('There was a problem adding element', error);
@@ -145,6 +162,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	// go back to first modal with arrow
 	document.querySelector('.modal-back').addEventListener('click', function(event) {
+		document.getElementById('imageValue').value = ""
+		document.getElementById('categoryValue').value = ""
+		document.getElementById('titleValue').value = ""
+		document.querySelector('.fa-image').style.display = "flex"
 		document.querySelector('.pAddPic').style.display = "flex"
 		document.getElementById('preview').style.display = "none"
 		document.getElementById('preview').innerHTML = ""
@@ -160,6 +181,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			document.querySelectorAll('.modal-content').forEach(modalContent => {
 				modalContent.style.display = "none"
 			})
+			document.getElementById('imageValue').value = ""
+			document.getElementById('categoryValue').value = ""
+			document.getElementById('titleValue').value = ""
+			document.querySelector('.fa-image').style.display = "flex"
 			document.querySelector('.pAddPic').style.display = "flex"
 			document.getElementById('preview').style.display = "none"
 			document.getElementById('preview').innerHTML = ""
@@ -175,6 +200,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		document.querySelectorAll('.modal-content').forEach(modalContent => {
 			modalContent.style.display = "none"
 		})
+		document.getElementById('imageValue').value = ""
+		document.getElementById('categoryValue').value = ""
+		document.getElementById('titleValue').value = ""
+		document.querySelector('.fa-image').style.display = "flex"
 		document.querySelector('.pAddPic').style.display = "flex"
 		document.getElementById('preview').style.display = "none"
 		document.getElementById('preview').innerHTML = ""
