@@ -5,15 +5,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	document.querySelector('.modal-open').addEventListener('click', function(event) {
 		document.querySelector('#modal-form').style.display = "none"
 		document.querySelector('#modal-gallery').style.display = "flex"
-		// document.querySelector('.modal').removeAttribute('aria-hidden')
-		document.querySelector('.modal').classList.add('open')
+		document.querySelector('.modal').classList.add('open');
 
 		// add works to modal
-
 		fetch('http://localhost:5678/api/works')
 		.then((response) => response.json())
 		.then((results) => {
-			console.log(results);
 			results.forEach((element, index) => {
 				categories.push(element.category);
 
@@ -48,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				crossIcon.classList.add('fa-arrows-up-down-left-right');
 				moveElem.appendChild(crossIcon);
 
+				// delete element################################################
 				dltElem.addEventListener('click', function(event) {
 					const workId = dltElem.parentElement.getAttribute('data-id');
 					fetch(`http://localhost:5678/api/works/${workId}`, {
@@ -57,7 +55,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 						},
 					})
 					.then(response => {
-						console.log(response);
 						if(!response.ok) {
 							throw new Error('Network response was not ok');
 						}
@@ -69,20 +66,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 						console.error(`There was a problem deleting element ${workId}:`, error);
 					});
 				});
-
-				// ...
-
 			});
 		})
+		.catch(error => {
+			console.error('There was a problem adding element', error);
+		});
 	})
 
-	// afficher cross au survol ////////////////////////////////////
-	// document.querySelector('.work-item-thumbnail').addEventListener('mouseover', function(event) {
-	// 	document.querySelectorAll('.fa-arrows-up-down-left-right').style.display = "flex"
-	// 	document.querySelectorAll('.move-element-btn').style.display = "flex"
-	// })
-
-	// previualiser l'image
+	// previualiser l'image ####################################################
 	const inputFile = document.getElementById('imageValue');
 	const preview = document.getElementById('preview');
 
@@ -103,52 +94,77 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			document.querySelector('#imageValue').style.display = "none"
 			document.querySelector('.addPicBtn').style.display = "none"
 			document.querySelector('#addPic').style.justifyContent = "center"
-	})
+		})
 			reader.readAsDataURL(file);
 			return;
 	});
 
-
-	// ajouter un work
-
-	let imageNewWork = document.createElement('img');
-	imageNewWork.setAttribute("crossorigin", "anonymous");
-	imageNewWork = document.getElementById("imageValue").value;
-
-	let titleNewWork = document.getElementById("titleValue").value;
-	let categoryNewWork = document.getElementById("categoryValue").value;
-
-	const formData = new FormData();
-
-	formData.append('image', imageNewWork);
-	formData.append('title', titleNewWork);
-	formData.append('category', categoryNewWork);
-
+	// add a new work #################################################
 	let addElem = document.querySelector(".valider-btn");
-
 	addElem.addEventListener('click', function(event) {
-		// const newWork = { 'image': imageNewWork, 'title': titleNewWork, 'category':categoryNewWork };
+		event.preventDefault();
+
+		const formData = new FormData();
+		formData.append('image', document.getElementById("imageValue").files[0]);
+		formData.append('title', document.getElementById("titleValue").value);
+		formData.append('category', document.getElementById("categoryValue").value);
+
 		fetch(`http://localhost:5678/api/works`, {
 			method: 'POST',
 			headers: {
 				Authorization: `Basic ${localStorage.getItem('token')}`,
-				'Content-Type': 'multipart/form-data',
-				body: 'multipart/form-data',
-				body: JSON.stringify(formData)
-
+				// dataType: "script"
+				// 'Access-Control-Allow-Origin': 'http://localhost:5678/api/works',
+				// crossDomain: true,
 			},
-			// body: formData
+			body: formData
 		})
 		.then(response => {
-			console.log(response.bodyUsed);
-			const res = response.blob();
-			console.log(response.bodyUsed);
-			return res;
+			console.log(response);
+			return response;
 		})
 		.then((response) => {
-			const objectURL = URL.createObjectURL(response);
-			imageNewWork.src = objectURL;
+
+
+			categories.push(response.category);
+
+			let newFigureElem = document.createElement('figure')
+			newFigureElem.setAttribute('id', response.id)
+			newFigureElem.classList.add(`work-item`);
+			newFigureElem.classList.add(`category-id-0`);
+			newFigureElem.classList.add(`category-id-${response.categoryId}`);
+			document.getElementsByClassName('gallery')[0].appendChild(newFigureElem);
+
+			let newImgElem = document.createElement('img');
+			newFigureElem.appendChild(newImgElem);
+			newImgElem.setAttribute("src", response.imageUrl);
+			newImgElem.setAttribute("crossorigin", "anonymous");
+
+			let newFigCaptionElement = document.createElement('figcaption');
+			newFigureElem.appendChild(newFigCaptionElement);
+			newFigCaptionElement.textContent = response.title;
 		})
+
+		.then(function(response) {
+			switch(response) {
+				case 500:
+					alert("Erreur côté serveur");
+				break;
+				case 400:
+					alert("Titre manquant ou categorie non selectionné");
+				case 401:
+					alert("Accès non autorisé");
+				break;
+				case 201:
+					console.log("Ajout réussie");
+					return response.json();
+				break;
+				default:
+					alert("Erreur inconnue");
+				break;
+			}
+		})
+
 		.catch(error => {
 			console.error('There was a problem adding element', error);
 		});
@@ -158,12 +174,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	document.querySelector('.modal-photo-btn').addEventListener('click', function(event) {
 		document.querySelector('#modal-gallery').style.display = "none"
 		document.querySelector('#modal-form').style.display = "flex"
+		// Loading categories
+		fetch('http://localhost:5678/api/categories')
+		.then((response) => response.json())
+		.then((categories) => {
+			categories.forEach((category, index) => {
+				const myOption = document.createElement('option')
+				myOption.setAttribute('value', category.id)
+				myOption.textContent = category.name
+				document.getElementById('categoryValue').appendChild(myOption)
+			})
+		})
+		.catch(error => {
+			console.error('There was a problem adding element', error)
+		});
 	})
 
 	// go back to first modal with arrow
 	document.querySelector('.modal-back').addEventListener('click', function(event) {
 		document.getElementById('imageValue').value = ""
-		document.getElementById('categoryValue').value = ""
+		document.getElementById('categoryValue').innerHTML = ""
 		document.getElementById('titleValue').value = ""
 		document.querySelector('.fa-image').style.display = "flex"
 		document.querySelector('.pAddPic').style.display = "flex"
@@ -175,50 +205,80 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		document.querySelector('#modal-gallery').style.display = "flex"
 	})
 
-	// Closing modal when clicking on X
-	document.querySelectorAll('.modal-close').forEach(modalClose => {
-		modalClose.addEventListener('click', function(event) {
-			document.querySelectorAll('.modal-content').forEach(modalContent => {
-				modalContent.style.display = "none"
-			})
-			document.getElementById('imageValue').value = ""
-			document.getElementById('categoryValue').value = ""
-			document.getElementById('titleValue').value = ""
-			document.querySelector('.fa-image').style.display = "flex"
-			document.querySelector('.pAddPic').style.display = "flex"
-			document.getElementById('preview').style.display = "none"
-			document.getElementById('preview').innerHTML = ""
-			document.getElementById('modal-photo').innerHTML = ""
-			document.querySelector('#imageValue').style.display = "flex"
-			document.querySelector('.addPicBtn').style.display = "flex"
-			document.querySelector('.modal').classList.remove('open')
-		})
-	})
+	// // Closing modal when clicking on X
+	// document.querySelectorAll('.modal-close').forEach(modalClose => {
+	// 	modalClose.addEventListener('click', function(event) {
+	// 		document.querySelectorAll('.modal-content').forEach(modalContent => {
+	// 			modalContent.style.display = "none"
+	// 		})
+	// 		document.getElementById('imageValue').value = ""
+	// 		document.getElementById('categoryValue').innerHTML = ""
+	// 		document.getElementById('titleValue').value = ""
+	// 		document.querySelector('.fa-image').style.display = "flex"
+	// 		document.querySelector('.pAddPic').style.display = "flex"
+	// 		document.getElementById('preview').style.display = "none"
+	// 		document.getElementById('preview').innerHTML = ""
+	// 		document.getElementById('modal-photo').innerHTML = ""
+	// 		document.querySelector('#imageValue').style.display = "flex"
+	// 		document.querySelector('.addPicBtn').style.display = "flex"
+	// 		document.querySelector('.modal').classList.remove('open')
+	// 	})
+	// })
 
-	// Closing modal when clicking on overlay
-	document.querySelector('.modal').addEventListener('click', function(event) {
+	// // Closing modal when clicking on overlay
+	// document.querySelector('.modal').addEventListener('click', function(event) {
+	// 	document.querySelectorAll('.modal-content').forEach(modalContent => {
+	// 		modalContent.style.display = "none"
+	// 	})
+	// 	document.getElementById('imageValue').value = ""
+	// 	document.getElementById('categoryValue').innerHTML = ""
+	// 	document.getElementById('titleValue').value = ""
+	// 	document.querySelector('.fa-image').style.display = "flex"
+	// 	document.querySelector('.pAddPic').style.display = "flex"
+	// 	document.getElementById('preview').style.display = "none"
+	// 	document.getElementById('preview').innerHTML = ""
+	// 	document.querySelector('#imageValue').style.display = "flex"
+	// 	document.querySelector('.addPicBtn').style.display = "flex"
+	// 	document.getElementById('modal-photo').innerHTML = ""
+	// 	document.querySelector('.modal').classList.remove('open')
+	// })
+
+	// essai function###########################################################
+	
+	function resetModal() {
 		document.querySelectorAll('.modal-content').forEach(modalContent => {
-			modalContent.style.display = "none"
-		})
-		document.getElementById('imageValue').value = ""
-		document.getElementById('categoryValue').value = ""
-		document.getElementById('titleValue').value = ""
-		document.querySelector('.fa-image').style.display = "flex"
-		document.querySelector('.pAddPic').style.display = "flex"
-		document.getElementById('preview').style.display = "none"
-		document.getElementById('preview').innerHTML = ""
-		document.querySelector('#imageValue').style.display = "flex"
-		document.querySelector('.addPicBtn').style.display = "flex"
-		document.getElementById('modal-photo').innerHTML = ""
-		document.querySelector('.modal').classList.remove('open')
-	})
+			modalContent.style.display = "none!important"
+		});
+		document.getElementById('imageValue').value = "";
+		document.getElementById('categoryValue').innerHTML = "";
+		document.getElementById('titleValue').value = "";
+		document.querySelector('.fa-image').style.display = "flex";
+		document.querySelector('.pAddPic').style.display = "flex";
+		document.getElementById('preview').style.display = "none";
+		document.getElementById('preview').innerHTML = "";
+		document.querySelector('#imageValue').style.display = "flex";
+		document.querySelector('.addPicBtn').style.display = "flex";
+		document.getElementById('modal-photo').innerHTML = "";
+		document.querySelector('.modal').classList.remove('open');
+	}
 
+document.querySelectorAll('.modal-close').forEach(modalClose => {
+	modalClose.addEventListener('click', function(event) {
+		resetModal();
+	});
+})
+
+document.querySelectorAll('.modal').forEach(modalContent => {
+	modalContent.addEventListener('click', function(event) {
+		resetModal();
+	});
+})
+
+	// #############################################################################
 	// Avoiding modal to close when clicking on modal content
 	document.querySelectorAll('.modal-content').forEach(modalContent => {
 		modalContent.addEventListener('click', function(event) {
 			event.stopPropagation()
 		})
 	})
-
-
 })

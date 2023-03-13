@@ -1,19 +1,44 @@
 
 
 body{
-max-width: 1140px;
-margin:auto;
-font-size: 14px;
+    background-color: #FFFEF8;
+    max-width: 1140px;
+    margin:auto;
+    font-size: 14px;
+}
+
+
+#insta{
+	width: 20px;
+}
+
+#seConnecter{
+    margin-top: 40px;
+    font-family: "Syne";
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    height: inherit;
+    height: 36px;
+}
+
+/* p {
+    border-bottom: black solid 1px;
+} */
+
+
+
+
+h2{
+    font-size: 30px;
 }
 
 a {
-
     margin: auto;
     text-decoration: none;
     color: #3D3D3D;
     font-family: 'work sans';
-    
-    ;
 }
 
 
@@ -23,20 +48,26 @@ header {
 	margin: 50px 0
 }
 
+header nav{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
 h1
 {
     display: flex;
     flex-direction: column;
     font-family: 'Syne';
+    font-size: 22px;
+    font-weight: 800;
     color: #B1663C;
 }
 
 h1 > span {
-    color: #B1663C;
-	font-family: 'Syne';
-	font-size:10px;
-	letter-spacing: 0.1em;
-;
+    font-family: 'Work Sans';
+    font-size: 10px;
+    letter-spacing: 0.1em;
 }
 
 h2{
@@ -44,14 +75,16 @@ h2{
     color: #1D6154;
 }
 
-nav ul {
+
+header nav ul {
+    width: 400px;
+    justify-content: space-around;
     font-family: 'Work Sans';
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
 }
-nav li {
+header nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
@@ -62,7 +95,7 @@ li:hover {
 
 
 #login {
-	width: 30%;
+	width: 379px;
     margin: auto;
 }
 #login > * {
@@ -79,7 +112,14 @@ li:hover {
 	flex-direction: column;
 }
 
-#login input {
+#email {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#password {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -125,11 +165,30 @@ input[type=submit]:hover {
     border: 1px solid #1D6154;
 }
 
+footer{
+    width: 100%;
+    height: 60px;
+    background-color: white;
+    position: absolute;
+    left: 0; bottom: 0;
+    font-family: 'Work Sans';
+
+}
+
 footer nav ul {
+    list-style-type: none;
+    font:inherit;
 	display: flex;
+    align-items: center;
 	justify-content: flex-end;
 	margin: 2em;
+    margin-right: 100px;
 }
+
+a {
+	text-decoration: none;
+}
+
 
 .only-guest{display:block;}
 .only-admin{display:none;}

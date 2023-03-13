@@ -1,27 +1,9 @@
-console.log('hello');
-
-
-
-// fetch('http://localhost:5678/api/works')
-// .then(function(response) {
-//     if(response.ok) {
-//         response = response.json()
-//         console.log(response)
-//         response.forEach((value, index) => {
-//            console.log(value)
-//            console.log(index)
-//         });
-//     }
-// })
-
-
 const categories = [];
 categories.push({id: 0, name: 'Tous'});
 
 fetch('http://localhost:5678/api/works')
 .then((response) => response.json())
 .then((results) => {
-	console.log(results);
 	results.forEach((element, index) => {
 		// Collecting categories
 		categories.push(element.category);
@@ -33,7 +15,6 @@ fetch('http://localhost:5678/api/works')
 		figureElem.classList.add(`category-id-0`);
 		figureElem.classList.add(`category-id-${element.categoryId}`);
 		document.getElementsByClassName('gallery')[0].appendChild(figureElem);
-		//document.querySelector('.gallery').appendChild(figureElem);
 
 		// Creating <img>
 		let imgElem = document.createElement('img');
@@ -46,11 +27,8 @@ fetch('http://localhost:5678/api/works')
 		let figCaptionElement = document.createElement('figcaption');
 		figureElem.appendChild(figCaptionElement);
 		figCaptionElement.textContent = element.title;
-
-
 	});
 
-	console.log(categories);
 	let alreadyDisplayedCategoriesIds = [];
 	categories.forEach((category, index) => {
 		if(alreadyDisplayedCategoriesIds.includes(category.id) === false) {
@@ -86,7 +64,6 @@ fetch('http://localhost:5678/api/works')
 	console.log(err);
 });
 
-
 document.addEventListener("DOMContentLoaded", function(event) {
 	// Handling logout
 	document.getElementById('nav-logout').addEventListener('click', function(event) {
@@ -99,5 +76,3 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		document.querySelector('body').classList.add(`connected`);
 	}
 });
-
-

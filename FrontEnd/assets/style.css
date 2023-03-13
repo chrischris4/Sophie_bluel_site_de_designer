@@ -28,15 +28,22 @@ time, mark, audio, video {
 	color: #000;
 }
 
-.fa-pen-to-square{
+.editIcon{
+	color: #fff;
+}
+
+.fa-regular fa-pen-to-square{
 	color: #000;
 }
+
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
+	background-color: #FFFEF8;
 	line-height: 1;
 }
 
@@ -53,6 +60,28 @@ body {
 	top: 0; left: 0;
 }
 
+#space{
+	width: 100%;
+	height: 50px;
+}
+
+#insta{
+	width: 20px;
+}
+
+#nav-project{
+	margin-right: 15px;
+	color: #000;
+}
+
+#nav-logout{
+	margin-right: 15px;
+}
+
+#nav-login{
+	color: #000;
+}
+
 .fa-image{
 	position: absolute;
 	top: 0px;
@@ -62,21 +91,29 @@ body {
 }
 
 .modifier {
+	color: #000;
 	margin-bottom: 5px;
 }
 
 .modifier1 {
+	color: #000;
 	margin: 5px 0 0 57px;
 }
 
 .modifier2 {
-	position: absolute;
-	right: 550px;
-	top: 665px;
+	color: #000;
+	margin-left: 20px;
+}
+
+#titre-modifier2 {
+	display: flex;
+    align-items: baseline;
+    justify-content: center;
 }
 
 
 #editBtn {
+	padding: 0 20px;
 	border-radius: 20px;
 	width: fit-content;
 	color: black;
@@ -101,6 +138,10 @@ input[type=submit] {
 	justify-content: space-between;
 	flex-direction: row;
 	margin-bottom: 50px;
+}
+
+.work-filter{
+	padding: 0 15px 0 15px;
 }
 
 button {
@@ -141,13 +182,15 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
+
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 100px 0
-}
-section {
 	margin: 50px 0
+}
+
+section {
+	margin: 50px 0 150px
 }
 
 h1{
@@ -172,13 +215,23 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
-nav ul {
+
+
+header nav{
+	align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+header nav ul {
+	width: 400px;
+    justify-content: space-around;
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
 }
-nav li {
+
+header nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
@@ -227,7 +280,7 @@ li:hover {
 
 }
 #contact {
-	width: 50%;
+	width: 379px;
 	margin: auto;
 }
 #contact > * {
@@ -245,7 +298,7 @@ li:hover {
 }
 
 #contact input {
-	height: 50px;
+	height: 37px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
@@ -269,10 +322,26 @@ li:hover {
 	border-radius: 60px ;
 }
 
+footer{
+    width: 100%;
+    height: 60px;
+    background-color: white;
+    position: absolute;
+    left: 0;
+}
+
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
+	align-items: center;
+	margin-right: 100px;
 	margin: 2em
+}
+
+footer nav li{
+	display: flex;
+	align-items: center;
+	margin-right: 100px;
 }
 
 a {
@@ -280,7 +349,7 @@ a {
 }
 
 
-/* modal */
+/* modal#################################################### */
 
 
 .modifier{
@@ -355,7 +424,7 @@ a {
 	color: white;
 	background-color: #1D6154;
 	margin : 2em auto ;
-	width: 180px;
+	width: 237px;
 	border-radius: 60px ;
 }
 
@@ -374,20 +443,19 @@ a {
 	border-radius: 5px;
 	border: solid 1px black;
 	position: absolute;
-	margin-left: -20px;
-	margin-top: 5px;
+	top: 5px;
+	right: 15px;
 }
 
 .move-element-btn{
-	/* display: none; */
 	width: 17px;
 	height: 17px;
 	background-color: #000;
 	border-radius: 5px;
 	border: solid 1px black;
 	position: absolute;
-	margin-left: -40px;
-	margin-top: 5px;
+	top: 5px;
+	right: 35px;
 }
 
 .move-element-btn:hover{
@@ -409,7 +477,6 @@ a {
 }
 
 .fa-arrows-up-down-left-right{
-	/* display: none; */
     position: absolute;
     top: 3.5px;
     left: 2.2px;
@@ -549,7 +616,9 @@ a {
 
 }
 
-
+.work-item-thumbnail{position: relative;}
+.move-element-btn{display:none;}
+.work-item-thumbnail:hover .move-element-btn{display:block;}
 
 .only-guest{display:block;}
 .only-admin{display:none !important;}

@@ -12,6 +12,10 @@
 	<script src="./assets/login.js"></script>
 </head>
 <body>
+	<div id="top-bar" class="only-admin">
+		<p><i class="fa-regular fa-pen-to-square editIcon"></i> Mode édition</p>
+		<input id="editBtn" type="submit" value="publier les changements">
+	</div>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 	<nav>
@@ -20,7 +24,7 @@
 			<li>contact</li>
 			<li><a id="nav-login" class="only-guest" href="login.html">login</a></li>
 			<li><a id="nav-logout" class="only-admin">logout</a></li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			<li><img id="insta" src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
 </header>
@@ -34,7 +38,7 @@
 		<input type="email" name="email" id="email">
 		<label for="password">Mot de passe</label>
 		<input type="password" name="password" id="password">
-		<input type="submit" value="Se connecter">
+		<input id="seConnecter" type="submit" value="Se connecter">
 	</form>
 	<p><a href="#">  Mot de passe oublié? </a></p>
 

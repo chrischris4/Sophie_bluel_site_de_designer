@@ -16,19 +16,21 @@
 </head>
 <body>
 	<div id="top-bar" class="only-admin">
-		<p><i class="fa-regular fa-pen-to-square"></i> Mode édition</p>
+		<p><i class="fa-regular fa-pen-to-square editIcon"></i> Mode édition</p>
 		<input id="editBtn" type="submit" value="publier les changements">
 	</div>
+	<div id="space" class="only-admin"></div>
+
 
 <header>
 	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 	<nav>
 		<ul>
-			<li><a href="index.html">projets</a></li>
+			<li><a id="nav-project" href="index.html">projets</a></li>
 			<li>contact</li>
 			<li><a id="nav-login" class="only-guest" href="login.html">login</a></li>
 			<li><a id="nav-logout" class="only-admin">logout</a></li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			<li><img id="insta" src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
 </header>
@@ -55,17 +57,19 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
-		<a href="#modal-works" class="modal-open">
-			<div class="modifier2 only-admin">
-				<i class="fa-regular fa-pen-to-square"></i><input id="update-works.udpate-btn" type="submit" value="modifier">
-			</div>
-		</a>
-
+		<div id="titre-modifier2">
+			<h2>Mes Projets</h2>
+				<a href="#modal-works" class="modal-open">
+					<div class="modifier2 only-admin">
+						<i class="fa-regular fa-pen-to-square"></i><input id="update-works.udpate-btn" type="submit" value="modifier">
+					</div>
+				</a>
+		</div>
 
 
 <div class="filter">
 </div>
+
 <div class="gallery">
 </div>
 
@@ -98,10 +102,12 @@
 <div id="modal-works" class="modal" aria-modal="true" role="modal" aria-labelledby="modal-title">
 
 	<div id="modal-gallery" class="modal-content">
-		<a href="#" class="modal-close"><i class="fa-solid fa-xmark"></i></a>
-		<h2 class="modal-title">Galerie photo</h2>
-		<div id="modal-photo"></div>
-		<div id="bordure"></div>
+		<a href="#" class="modal-close">
+			<i class="fa-solid fa-xmark"></i>
+		</a>
+			<h2 class="modal-title">Galerie photo</h2>
+				<div id="modal-photo"></div>
+				<div id="bordure"></div>
 		<a href="#modal-form" class="modal-photo-btn" value="Ajouter une photo">Ajouter une photo</a>
 		<div id="modal-delete">
 			<p>Supprimer la galerie</p>
@@ -116,28 +122,19 @@
 		<h2 class="modal-title">Ajout photo</h2>
 		<div id="addPic">
 			<i class="fa-regular fa-image"></i>
-			<div id="preview">
-
-			</div>
+				<div id="preview"></div>
 			<input type="file" accept=".jpg, .png" id="imageValue" class="add-image">
-			<button class="addPicBtn">+ Ajouter photo</button>
-			<p class="pAddPic">jpg, png : 4mo max</p>
+				<button class="addPicBtn">+ Ajouter photo</button>
+					<p class="pAddPic">jpg, png : 4mo max</p>
 		</div>
 		<div class="modal-form-input">
-		<label for="titre">Titre</label>
-		<input type="text" id="titleValue">
-		<label for="categorie">Categorie</label>
-		<select name="categorie" id="categoryValue">
-			<option value=""></option>
-			<option value="object">Object</option>
-			<option value="appartement">Appartement</option>
-			<option value="hoteletrestaurant">Hôtel et restaurant</option>
-		</select>
-				</div>
+			<label for="titre">Titre</label>
+			<input type="text" id="titleValue">
+			<label for="categorie">Catégorie</label>
+			<select name="categorie" id="categoryValue"></select>
+		</div>
 		<div id="bordure"></div>
 		<button class="valider-btn" value="valider">Valider</button>
-
-		
 	</div>
 </div>
 
