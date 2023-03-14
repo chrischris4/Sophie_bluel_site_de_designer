@@ -42,7 +42,7 @@ fetch('http://localhost:5678/api/works')
 			btn.setAttribute("class", "work-filter");
 			btn.setAttribute("data-filter", `category-id-${category.id}`);
 			document.body.appendChild(btn);
-			document.getElementsByClassName('filter')[0].appendChild(btn);
+			document.getElementsByClassName('filter')[0].appendChild(btn);			
 
 			// Adding filter for all categories
 			document.querySelectorAll('.work-filter').forEach(filterButton => {
@@ -56,6 +56,21 @@ fetch('http://localhost:5678/api/works')
 						}
 					});
 				});
+			});
+
+			//garder le style du bouton cliqué
+			const filterButtons = document.querySelectorAll('.work-filter');
+
+			filterButtons.forEach(button => {
+			button.addEventListener('click', () => {
+				button.classList.add('filter-active');
+
+				filterButtons.forEach(otherButton => {
+				if (otherButton !== button) {
+					otherButton.classList.remove('filter-active');
+				}
+				});
+			});
 			});
 		}
 	});

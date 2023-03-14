@@ -126,13 +126,13 @@ input[type=submit] {
 	font-family: 'Work Sans';
 	appearance: inherit;
 	border: none;
-	background-color: white;
+	background-color: #FFFEF8;
 	color: black;
 }
 
 .filter {
 	margin: auto;
-	width: 50%;
+	width: fit-content;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -141,6 +141,7 @@ input[type=submit] {
 }
 
 .work-filter{
+	margin: 0 10px;
 	padding: 0 15px 0 15px;
 }
 
@@ -155,7 +156,11 @@ button {
 }
 
 button:hover {
+	background-color: #1D6154;
+	color: white;
+}
 
+.filter-active{
 	background-color: #1D6154;
 	color: white;
 }
@@ -218,6 +223,7 @@ h2{
 
 
 header nav{
+	cursor: pointer;
 	align-items: center;
     display: flex;
     justify-content: space-between;
@@ -335,13 +341,12 @@ footer nav ul {
 	justify-content: flex-end;
 	align-items: center;
 	margin-right: 100px;
-	margin: 2em
+	margin-top: 20px;
 }
 
 footer nav li{
 	display: flex;
 	align-items: center;
-	margin-right: 100px;
 }
 
 a {
@@ -433,6 +438,7 @@ a {
 }
 
 #modal-gallery {
+	width: fit-content;
 	height: fit-content;
 }
 
@@ -497,6 +503,7 @@ a {
 	display: none;
 	align-items: center;
 	height: fit-content;
+	width: fit-content;
 }
 
 

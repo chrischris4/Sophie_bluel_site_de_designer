@@ -49,6 +49,7 @@ header {
 }
 
 header nav{
+    cursor: pointer;
     align-items: center;
     display: flex;
     justify-content: space-between;
@@ -128,7 +129,7 @@ li:hover {
 
 
 #login label {
-	margin: 2em 0 1em 0;
+	margin: 2em 0 0 0;
 }
 
 
@@ -158,6 +159,7 @@ input[type=submit] {
     cursor: pointer;
     width: 50%;
 }
+
 input[type=submit]:hover {
     font-family: 'Work Sans';
     background-color: white;
@@ -181,12 +183,16 @@ footer nav ul {
 	display: flex;
     align-items: center;
 	justify-content: flex-end;
-	margin: 2em;
+    margin-top: 20px;
     margin-right: 100px;
 }
 
 a {
 	text-decoration: none;
+}
+
+p{
+    text-decoration: underline;
 }
 
 

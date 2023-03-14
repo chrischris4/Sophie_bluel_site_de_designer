@@ -47,24 +47,43 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 				// delete element################################################
 				dltElem.addEventListener('click', function(event) {
-					const workId = dltElem.parentElement.getAttribute('data-id');
-					fetch(`http://localhost:5678/api/works/${workId}`, {
-						method: 'DELETE',
-						headers: {
-							Authorization: `Basic ${localStorage.getItem('token')}`,
-						},
-					})
-					.then(response => {
-						if(!response.ok) {
-							throw new Error('Network response was not ok');
-						}
-						console.log(`Element ${workId} deleted successfully`);
-						document.querySelector(`#work-item-thumbnail-${workId}`).remove();
-						document.querySelector(`#work-item-${workId}`).remove();
-					})
-					.catch(error => {
-						console.error(`There was a problem deleting element ${workId}:`, error);
-					});
+					if(confirm("Êtes vous sur(e) de vouloir supprimer ?")) {
+						const workId = dltElem.parentElement.getAttribute('data-id');
+						fetch(`http://localhost:5678/api/works/${workId}`, {
+							method: 'DELETE',
+							headers: {
+								Authorization: `Basic ${localStorage.getItem('token')}`,
+							},
+						})
+						.then(response => {
+							if(!response.ok) {
+								throw new Error('Network response was not ok');
+							}
+							console.log(`Element ${workId} deleted successfully`);
+							document.querySelector(`#work-item-thumbnail-${workId}`).remove();
+							document.querySelector(`#work-item-${workId}`).remove();
+						})
+						// .then(function(response) {
+						// 	switch(response.status) {
+						// 		case 500:
+						// 			alert("Erreur côté serveur");
+						// 		break;
+						// 		case 401:
+						// 			alert("Accès non autorisé");
+						// 		break;
+						// 		case 200:
+						// 			console.log("Suppression réussie");
+						// 			return response.json();
+						// 		break;
+						// 		default:
+						// 			alert("Erreur inconnue");
+						// 		break;
+						// 	}
+						// })
+						.catch(error => {
+							console.error(`There was a problem deleting element ${workId}:`, error);
+						});
+					}
 				});
 			});
 		})
@@ -73,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		});
 	})
 
-	// previualiser l'image ####################################################
+	// Previsualiser l'image ####################################################
 	const inputFile = document.getElementById('imageValue');
 	const preview = document.getElementById('preview');
 
@@ -99,35 +118,45 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			return;
 	});
 
-	// add a new work #################################################
+	// Add a new work #################################################
 	let addElem = document.querySelector(".valider-btn");
 	addElem.addEventListener('click', function(event) {
 		event.preventDefault();
-
 		const formData = new FormData();
 		formData.append('image', document.getElementById("imageValue").files[0]);
 		formData.append('title', document.getElementById("titleValue").value);
-		formData.append('category', document.getElementById("categoryValue").value);
-
+		formData.append('category', Number(document.getElementById("categoryValue").value));
 		fetch(`http://localhost:5678/api/works`, {
 			method: 'POST',
 			headers: {
 				Authorization: `Basic ${localStorage.getItem('token')}`,
-				// dataType: "script"
-				// 'Access-Control-Allow-Origin': 'http://localhost:5678/api/works',
-				// crossDomain: true,
 			},
 			body: formData
 		})
-		.then(response => {
-			console.log(response);
-			return response;
+		.then(function(response) {
+			switch(response.status) {
+				case 500:
+					alert("Erreur côté serveur");
+				break;
+				case 400:
+					alert("Données incomplètes");
+				break;
+				case 401:
+					alert("Accès non autorisé");
+				break;
+				case 201:
+					console.log("Ajout réussie");
+					return response.json();
+				break;
+				default:
+					alert("Erreur inconnue");
+				break;
+			}
 		})
 		.then((response) => {
+			console.log(response);
 
-
-			categories.push(response.category);
-
+			// Adding work in the page content
 			let newFigureElem = document.createElement('figure')
 			newFigureElem.setAttribute('id', response.id)
 			newFigureElem.classList.add(`work-item`);
@@ -143,28 +172,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			let newFigCaptionElement = document.createElement('figcaption');
 			newFigureElem.appendChild(newFigCaptionElement);
 			newFigCaptionElement.textContent = response.title;
-		})
 
-		.then(function(response) {
-			switch(response) {
-				case 500:
-					alert("Erreur côté serveur");
-				break;
-				case 400:
-					alert("Titre manquant ou categorie non selectionné");
-				case 401:
-					alert("Accès non autorisé");
-				break;
-				case 201:
-					console.log("Ajout réussie");
-					return response.json();
-				break;
-				default:
-					alert("Erreur inconnue");
-				break;
-			}
-		})
+			// Closing the popup
+			resetModal();
 
+		})
 		.catch(error => {
 			console.error('There was a problem adding element', error);
 		});
@@ -262,17 +274,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		document.querySelector('.modal').classList.remove('open');
 	}
 
-document.querySelectorAll('.modal-close').forEach(modalClose => {
-	modalClose.addEventListener('click', function(event) {
-		resetModal();
-	});
-})
+	document.querySelectorAll('.modal-close').forEach(modalClose => {
+		modalClose.addEventListener('click', function(event) {
+			resetModal();
+		});
+	})
 
-document.querySelectorAll('.modal').forEach(modalContent => {
-	modalContent.addEventListener('click', function(event) {
-		resetModal();
-	});
-})
+	document.querySelectorAll('.modal').forEach(modalContent => {
+		modalContent.addEventListener('click', function(event) {
+			resetModal();
+		});
+	})
 
 	// #############################################################################
 	// Avoiding modal to close when clicking on modal content
