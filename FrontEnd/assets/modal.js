@@ -63,23 +63,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
 							document.querySelector(`#work-item-thumbnail-${workId}`).remove();
 							document.querySelector(`#work-item-${workId}`).remove();
 						})
-						// .then(function(response) {
-						// 	switch(response.status) {
-						// 		case 500:
-						// 			alert("Erreur côté serveur");
-						// 		break;
-						// 		case 401:
-						// 			alert("Accès non autorisé");
-						// 		break;
-						// 		case 200:
-						// 			console.log("Suppression réussie");
-						// 			return response.json();
-						// 		break;
-						// 		default:
-						// 			alert("Erreur inconnue");
-						// 		break;
-						// 	}
-						// })
+						.then(function(response) {
+							switch(response.status) {
+								case 500:
+									alert("Erreur côté serveur");
+								break;
+								case 401:
+									alert("Accès non autorisé");
+								break;
+								case 200:
+									console.log("Suppression réussie");
+									return response.json();
+								break;
+								default:
+									alert("Erreur inconnue");
+								break;
+							}
+						})
 						.catch(error => {
 							console.error(`There was a problem deleting element ${workId}:`, error);
 						});
@@ -217,45 +217,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		document.querySelector('#modal-gallery').style.display = "flex"
 	})
 
-	// // Closing modal when clicking on X
-	// document.querySelectorAll('.modal-close').forEach(modalClose => {
-	// 	modalClose.addEventListener('click', function(event) {
-	// 		document.querySelectorAll('.modal-content').forEach(modalContent => {
-	// 			modalContent.style.display = "none"
-	// 		})
-	// 		document.getElementById('imageValue').value = ""
-	// 		document.getElementById('categoryValue').innerHTML = ""
-	// 		document.getElementById('titleValue').value = ""
-	// 		document.querySelector('.fa-image').style.display = "flex"
-	// 		document.querySelector('.pAddPic').style.display = "flex"
-	// 		document.getElementById('preview').style.display = "none"
-	// 		document.getElementById('preview').innerHTML = ""
-	// 		document.getElementById('modal-photo').innerHTML = ""
-	// 		document.querySelector('#imageValue').style.display = "flex"
-	// 		document.querySelector('.addPicBtn').style.display = "flex"
-	// 		document.querySelector('.modal').classList.remove('open')
-	// 	})
-	// })
 
-	// // Closing modal when clicking on overlay
-	// document.querySelector('.modal').addEventListener('click', function(event) {
-	// 	document.querySelectorAll('.modal-content').forEach(modalContent => {
-	// 		modalContent.style.display = "none"
-	// 	})
-	// 	document.getElementById('imageValue').value = ""
-	// 	document.getElementById('categoryValue').innerHTML = ""
-	// 	document.getElementById('titleValue').value = ""
-	// 	document.querySelector('.fa-image').style.display = "flex"
-	// 	document.querySelector('.pAddPic').style.display = "flex"
-	// 	document.getElementById('preview').style.display = "none"
-	// 	document.getElementById('preview').innerHTML = ""
-	// 	document.querySelector('#imageValue').style.display = "flex"
-	// 	document.querySelector('.addPicBtn').style.display = "flex"
-	// 	document.getElementById('modal-photo').innerHTML = ""
-	// 	document.querySelector('.modal').classList.remove('open')
-	// })
-
-	// essai function###########################################################
+	// function close modal###########################################################
 	
 	function resetModal() {
 		document.querySelectorAll('.modal-content').forEach(modalContent => {

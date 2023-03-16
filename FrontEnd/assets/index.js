@@ -28,6 +28,20 @@ fetch('http://localhost:5678/api/works')
 		figureElem.appendChild(figCaptionElement);
 		figCaptionElement.textContent = element.title;
 	});
+	(function(response) {
+		switch(response.status) {
+			case 500:
+				alert("Erreur côté serveur");
+			break;
+			case 200:
+				console.log("Récuperation réussie");
+				return response.json();
+			break;
+			default:
+				alert("Erreur inconnue");
+			break;
+		}
+	})
 
 	let alreadyDisplayedCategoriesIds = [];
 	categories.forEach((category, index) => {
